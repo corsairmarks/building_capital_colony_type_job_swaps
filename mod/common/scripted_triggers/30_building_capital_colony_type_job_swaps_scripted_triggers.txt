@@ -4,9 +4,26 @@ should_swap_extra_high_priests = {
 	OR = {
 		has_designation = col_bureau_spiritualist
 		has_designation = col_habitat_bureau_spiritualist
+		AND = {
+			is_sector_capital = yes
+			exists = owner
+			owner = {
+				NAND = {
+					has_valid_civic = civic_exalted_priesthood
+					OR = {
+						has_valid_civic = civic_corporate_dominion
+						has_authority = auth_imperial
+						is_galactic_emperor = yes
+						prev = { bcctjs_is_research_colony = yes }
+					}
+				}
+			}
+		}
 	}
+	exists = owner
 	owner = {
 		is_regular_empire = yes
+		is_spiritualist = yes
 		is_megacorp = no
 	}
 }
@@ -17,13 +34,28 @@ should_swap_extra_nobles = {
 	OR = {
 		has_designation = col_bureau
 		has_designation = col_habitat_bureau
+		AND = {
+			is_sector_capital = yes
+			exists = owner
+			owner = {
+				NAND = {
+					has_valid_civic = civic_corporate_dominion
+					OR = {
+						has_valid_civic = civic_exalted_priesthood
+						has_valid_civic = civic_aristocratic_elite
+						has_valid_civic = civic_technocracy
+					}
+				}
+			}
+		}
 	}
+	exists = owner
 	owner = {
 		is_regular_empire = yes
 		is_megacorp = no
 		OR = {
-			has_authority = auth_imperial
 			has_valid_civic = civic_aristocratic_elite
+			has_authority = auth_imperial
 			is_galactic_emperor = yes
 		}
 	}
@@ -32,12 +64,19 @@ should_swap_extra_nobles = {
 # this = planet
 should_swap_extra_head_researchers = {
 	optimize_memory
-	OR = {
-		has_designation = col_research
-		has_designation = col_habitat_research
-		has_designation = col_ecu_research
-		has_designation = col_ring_research
+	bcctjs_is_research_colony = yes
+	exists = owner
+	owner = {
+		NAND = {
+			has_valid_civic = civic_technocracy
+			OR = {
+				has_valid_civic = civic_corporate_dominion
+				has_authority = auth_imperial
+				is_galactic_emperor = yes
+			}
+		}
 	}
+	exists = owner
 	owner = {
 		is_regular_empire = yes
 		is_megacorp = no
@@ -51,6 +90,24 @@ should_swap_extra_merchants = {
 		has_designation = col_city
 		has_designation = col_habitat_trade
 		has_designation = col_ring_trade
+		AND = {
+			is_sector_capital = yes
+			exists = owner
+			owner = {
+				OR = {
+					has_valid_civic = civic_corporate_dominion
+					AND = {
+						has_valid_civic = civic_merchant_guilds
+						NOR = {
+							has_authority = auth_imperial
+							is_galactic_emperor = yes
+							is_spiritualist = yes
+							prev = { bcctjs_is_research_colony = yes }
+						}
+					}
+				}
+			}
+		}
 		# from my trade mod
 		AND = {
 			has_global_flag = trade_district_enhancements_installed
@@ -76,5 +133,15 @@ should_swap_extra_merchants = {
 	owner = {
 		is_regular_empire = yes
 		is_megacorp = no
+	}
+}
+
+bcctjs_is_research_colony = {
+	optimize_memory
+	OR = {
+		has_designation = col_research
+		has_designation = col_habitat_research
+		has_designation = col_ecu_research
+		has_designation = col_ring_research
 	}
 }

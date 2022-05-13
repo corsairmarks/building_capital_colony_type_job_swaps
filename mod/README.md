@@ -7,6 +7,7 @@ Similar to how the Merchant Guilds, Exalted Priesthood, Aristocratic Elite, and 
 * Trade-related colonies will swap for Merchants
 * Unity-related colonies will swap for High Priests (spiritualist empires) or Nobles (Aristocratic Elite, imperial authorities, or the Galactic Emperor)
 * Research-related colonies will swap for Science Directors
+* Empire and sector capitals will swap for an extra trade or unity job based on job swap civics and the above criteria, including Merchants for Corporate Dominions
 
 These swaps combine with those for the leader-swap civics, so that some planets may end up with no Politicians at all.
 
@@ -60,6 +61,8 @@ This mod also supports colony designations from my mods [Enhanced Trade District
 * 2.0.0 Update for Stellaris version 3.4 "Cepheus"
     * Use memory optimization feature for triggers
     * Update habitat capital building with deficit changes
+    * Fix a bug where empire capitals did not get as many noble jobs as intended
+    * Sector capitals (including your empire capital) try to swap a politician for another applicable ruler job (influenced by )
 
 ## Source Code
 
